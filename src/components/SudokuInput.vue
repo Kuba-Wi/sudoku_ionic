@@ -58,6 +58,12 @@ export default {
                     this.input_values[i][j] = 0
                 }
             }
+        },
+        fillInputCells(boardValues) {
+            for (let i = 0; i < this.$refs.cell_input.length; ++i) {
+                this.$refs.cell_input[i].value = (boardValues[i] !== 0) ? boardValues[i] : ''
+                this.input_values[Math.floor(i / 9)][i % 9] = boardValues[i]
+            }
         }
     }
 }
