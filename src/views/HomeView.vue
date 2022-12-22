@@ -1,7 +1,14 @@
 <template>
   <ion-page>
+    <ion-header>
+      <ion-toolbar>
+        <ion-button fill="clear" slot="end" @click="this.$router.push('/settings')">
+          <ion-icon :icon="ellipsisVerticalOutline"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
+    </ion-header>
     <ion-content :fullscreen="true">
-      <SudokuInput ref="inputBoard"/>
+      <SudokuInput id="sudoku_input" ref="inputBoard"/>
       <div id="buttons_container">
         <ion-button id="solve_btn" @click="solve">Solve</ion-button>
         <ion-button @click="scanPhoto">Scan photo</ion-button>
@@ -14,7 +21,8 @@
 </template>
 
 <script>
-import { IonContent, IonPage, IonButton } from '@ionic/vue'
+import { IonHeader, IonToolbar, IonIcon, IonContent, IonPage, IonButton } from '@ionic/vue'
+import { ellipsisVerticalOutline } from 'ionicons/icons'
 import { Camera, CameraResultType } from '@capacitor/camera'
 
 import SudokuInput from '../components/SudokuInput.vue'
@@ -31,12 +39,16 @@ export default {
     IonButton,
     SudokuInput,
     SudokuResult,
-    LoadingAnim
+    LoadingAnim,
+    IonHeader,
+    IonToolbar,
+    IonIcon
   },
   data() {
     return {
       showResult: false,
-      showLoading: false
+      showLoading: false,
+      ellipsisVerticalOutline
     }
   },
   methods: {
@@ -76,7 +88,7 @@ export default {
 
       try {
         var fetchController = new AbortController()
-        const res_promise = await fetch("http://192.168.1.14:5000/process_image", {
+        const res_promise = await fetch(`http://${this.$store.getters.IP}:${this.$store.getters.Port}/process_image`, {
           method: "POST",
           body: formData,
           signal: fetchController.signal
@@ -94,6 +106,14 @@ export default {
 </script>
 
 <style scoped>
+ion-icon {
+  color: black
+}
+
+#sudoku_input {
+  margin-top: 20px;
+}
+
 #buttons_container {
   text-align: center;
   margin-bottom: 10px;
