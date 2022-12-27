@@ -17,9 +17,14 @@ export default {
         SudokuBase
     },
     methods: {
-        fillBoardValues(resultBoard) {
+        fillBoardValues(resultBoard, givenBoard) {
             for (let i = 0; i < this.$refs.cell_td.length; ++i) {
                 this.$refs.cell_td[i].textContent = resultBoard[Math.floor(i / 9)][i % 9]
+                if (givenBoard[Math.floor(i / 9)][i % 9] !== 0) {
+                    this.$refs.cell_td[i].style.fontWeight = "bold"
+                } else {
+                    this.$refs.cell_td[i].style.fontWeight = "normal"
+                }
             }
         }
     }

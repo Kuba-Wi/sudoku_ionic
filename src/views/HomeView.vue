@@ -61,12 +61,13 @@ export default {
       let solver = new Solver(this.$refs.inputBoard.input_values)
       if (solver.solve()) {
         this.showResult = true
-        this.$refs.resultBoard.fillBoardValues(solver.sudokuBoard)
+        this.$refs.resultBoard.fillBoardValues(solver.sudokuBoard, this.$refs.inputBoard.input_values)
       } else {
         window.alert("Wrong input. Can't solve")
       }
     },
     async scanPhoto() {
+      this.showResult = false
       try {
         var image = await Camera.getPhoto({
           resultType: CameraResultType.Uri,

@@ -19,7 +19,6 @@
                     <ion-input type="number" v-model="port" @change="validatePort"></ion-input>
                 </ion-item>
             </ion-list>
-            <!-- <ion-button id="save_button" expand="block">Save</ion-button> -->
         </ion-content>
     </ion-page>
 </template>
