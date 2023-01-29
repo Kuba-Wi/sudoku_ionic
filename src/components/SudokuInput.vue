@@ -37,12 +37,9 @@ export default {
     },
     methods: {
         onInputChange(event, i, j, k) {
-            if (event.target.value === ' ') {
-                event.target.value = ''
-                return
-            }
-
-            if ((isNaN(event.target.value) && event.target.value !== '') || event.target.value === '0') {
+            if ((isNaN(event.target.value) && event.target.value !== '') ||
+                 event.target.value === '0' ||
+                 event.target.value === ' ') {
                 event.target.value = 1
             }
 
